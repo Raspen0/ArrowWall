@@ -1,6 +1,7 @@
 name: ArrowWall
 main: com.amaranthinecorporation.ArrowWall.ArrowWall
-version: 0.4
+version: 0.5
+prefix: ArrowWall
 commands:
     aw:
         description: summons an wall of arrows towards the direction the player is facing
@@ -22,3 +23,22 @@ commands:
         description: reloads ArrowWall config
         usage: |
                     The command was not recognized. /awreload
+permissions:
+   arrowwall.awreload:
+      description: Reloads ArrowWall config
+      default: op
+   arrowwall.exempt:
+      description: Don't take from inventory
+      default: op
+   arrowwall.aw:
+      description: Summons an wall of arrows towards the direction the player is facing 
+      default: op
+   arrowwall.aw.fw:
+      description: Summons a flaming wall of arrows towards the direction the player is facing
+      default: op
+   arrowwall.aw.aws:
+      description: Summons an wall of arrows from the sky at the block the player is looking at
+      default: op
+   arrowwall.aw.fws:
+      description: Summons a flaming wall of arrows from the sky at the block the player is looking at
+      default: op

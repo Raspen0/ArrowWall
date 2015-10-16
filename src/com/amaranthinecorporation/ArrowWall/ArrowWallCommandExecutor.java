@@ -26,7 +26,7 @@ public class ArrowWallCommandExecutor implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
 		
 		if (commandLabel.equalsIgnoreCase("awreload")) {
-			if (hasPermission("arrowwall.awreload", sender)) {
+			if (sender.hasPermission("arrowwall.awreload")) {
 				plugin.config.readConfiguration();
 				sender.sendMessage("ArrowWall configuration reloaded.");
 				plugin.log.log(Level.INFO, plugin.logPrefix + "Configuration reloaded.");
@@ -63,36 +63,30 @@ public class ArrowWallCommandExecutor implements CommandExecutor {
 		}
 		
 		// check if player has enough items in inventory
-		if (plugin.useInventory) {
-			// Permissions in use?
-			if (plugin.usePermissions) {
-				// Yes
-				// Exempt from inventory?
-				if (!hasPermission("arrowwall.exempt", sender)) {
-					// Not exempt
-					// Do they have enough arrows?
-					if (checkInventory(player, Material.ARROW, arrowsToSpawn)) { // Yes
-						if (attemptSpawnArrows(commandLabel, player, arrowsToSpawn)) {
-							takeFromInventory(player, Material.ARROW, arrowsToSpawn);
-						}
+		 if (plugin.useInventory) {
+			// Yes
+			// Exempt from inventory?
+			if (!sender.hasPermission("arrowwall.exempt")) {
+				// Not exempt
+				// Do they have enough arrows?
+				if (checkInventory(player, Material.ARROW, arrowsToSpawn)) { // Yes
+					if (attemptSpawnArrows(commandLabel, player, arrowsToSpawn)) {
+						takeFromInventory(player, Material.ARROW, arrowsToSpawn);
+
 					} else { // Not enough arrows
 						player.sendMessage(ChatColor.RED + "You don't have enough arrows.");
 					}
 				} else { // Yes, exempt
 					attemptSpawnArrows(commandLabel, player, arrowsToSpawn);
 				}
-			} else { // Not using permissions
-				/*if (plugin.useExemption) { // exemption
-					attemptSpawnArrows(commandLabel, player, arrowsToSpawn);
-				} else {*/
-					if (checkInventory(player, Material.ARROW, arrowsToSpawn)) {
-						if (attemptSpawnArrows(commandLabel, player, arrowsToSpawn)) {
-							takeFromInventory(player, Material.ARROW, arrowsToSpawn);
-						}
-					} else { // Not enough arrows
-						player.sendMessage(ChatColor.RED + "You don't have enough arrows.");
+			} else {
+				if (checkInventory(player, Material.ARROW, arrowsToSpawn)) {
+					if (attemptSpawnArrows(commandLabel, player, arrowsToSpawn)) {
+						takeFromInventory(player, Material.ARROW, arrowsToSpawn);
 					}
-			//}
+				} else { // Not enough arrows
+					player.sendMessage(ChatColor.RED + "You don't have enough arrows.");
+				}
 			}
 		} else {
 			attemptSpawnArrows(commandLabel, player, arrowsToSpawn);
@@ -103,13 +97,13 @@ public class ArrowWallCommandExecutor implements CommandExecutor {
 	}
 	
 	private static boolean attemptSpawnArrows(String commandLabel, Player player, int arrowsToSpawn) {
-		if (commandLabel.equalsIgnoreCase("aw") && (hasPermission("arrowwall.aw", player))) {
+		if (commandLabel.equalsIgnoreCase("aw") && (player.hasPermission("arrowwall.aw"))) {
 			util.spawnArrows(player, arrowsToSpawn, false, false);
-		} else if (commandLabel.equalsIgnoreCase("fw") && (hasPermission("arrowwall.aw.fw", player))) {
+		} else if (commandLabel.equalsIgnoreCase("fw") && (player.hasPermission("arrowwall.aw.fw"))) {
 			util.spawnArrows(player, arrowsToSpawn, true, false);
-		} else if (commandLabel.equalsIgnoreCase("aws") && (hasPermission("arrowwall.aw.aws", player))) {
+		} else if (commandLabel.equalsIgnoreCase("aws") && (player.hasPermission("arrowwall.aw.aws"))) {
 			util.spawnArrows(player, arrowsToSpawn, false, true);
-		} else if (commandLabel.equalsIgnoreCase("fws") && (hasPermission("arrowwall.aw.fws", player))) {
+		} else if (commandLabel.equalsIgnoreCase("fws") && (player.hasPermission("arrowwall.aw.fws"))) {
 			util.spawnArrows(player, arrowsToSpawn, true, true);
 		} else {
 			player.sendMessage(ChatColor.RED + "You don't have permission to use that command.");
@@ -135,9 +129,6 @@ public class ArrowWallCommandExecutor implements CommandExecutor {
 			System.out.println("ERROR: not enough actual arrows for: " + s.toString() + ", shouldn't ever happen.");
 		
 	}
-	
-	public static boolean hasPermission(String permission, CommandSender sender) {
-		return (!(sender instanceof Player) || Permission.generic((Player) sender, permission));
-	}
+
 	
 }

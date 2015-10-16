@@ -29,7 +29,6 @@ public class ArrowWall extends JavaPlugin {
     public int cleanupTime = 5;
     //public boolean shootFromSky = false;
     public boolean useInventory = false;
-    public boolean usePermissions = true;
    //public boolean useExemption = true;
 
 
@@ -38,7 +37,6 @@ public class ArrowWall extends JavaPlugin {
     	config = new ArrowWallConfiguration(this.getDataFolder(), this);
     	config.setupConfiguration();
         config.readConfiguration();
-        Permission.initialize(getServer());
         
         ArrowWallCommandExecutor executor = new ArrowWallCommandExecutor(this);
 		this.getCommand("aw").setExecutor(executor);    

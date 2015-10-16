@@ -58,8 +58,6 @@ public class ArrowWallConfiguration {
 				out.write("#Use inventory?\n");
 				out.write("inventory: false\n");
 				out.write("\n");
-				out.write("#Use Permissions and Ops if true, everyone has access if false.\n");
-				out.write("permissions: true\n");
 				//out.write("#Use inventory exemption if Permissions disabled?\n");
 				//out.write("exempt: true\n");
 				out.write("\n");
@@ -105,9 +103,6 @@ public class ArrowWallConfiguration {
 				out.write("#Use inventory?\n");
 				out.write("inventory: " + config.getBoolean("inventory", false) + "\n");
 				out.write("\n");
-				out.write("#Use Permissions and Ops if true, everyone has access if false.\n");
-				out.write("permissions: " + config.getBoolean("permissions", true) + "\n");
-				out.write("\n");
 				//out.write("#Use inventory exemption if Permissions disabled?\n");
 				//out.write("exempt: true\n");
 				out.write("\n");
@@ -131,10 +126,8 @@ public class ArrowWallConfiguration {
 		plugin.useCleanup = config.getBoolean("cleanup", true);
 		plugin.cleanupTime = config.getInt("time", 5000);
 		plugin.useInventory = config.getBoolean("inventory", false);
-		plugin.usePermissions = config.getBoolean("permissions", true);
 		//plugin.useExemption = config.getBoolean("exempt", true);
 		
-		Permission.initializeSilent(plugin.getServer());
 		
 	}
 }
