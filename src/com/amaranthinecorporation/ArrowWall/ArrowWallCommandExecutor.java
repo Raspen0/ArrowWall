@@ -98,13 +98,15 @@ public class ArrowWallCommandExecutor implements CommandExecutor {
 	
 	private static boolean attemptSpawnArrows(String commandLabel, Player player, int arrowsToSpawn) {
 		if (commandLabel.equalsIgnoreCase("aw") && (player.hasPermission("arrowwall.aw"))) {
-			util.spawnArrows(player, arrowsToSpawn, false, false);
+			util.spawnArrows(player, arrowsToSpawn, false, false, false);
 		} else if (commandLabel.equalsIgnoreCase("fw") && (player.hasPermission("arrowwall.aw.fw"))) {
-			util.spawnArrows(player, arrowsToSpawn, true, false);
+			util.spawnArrows(player, arrowsToSpawn, true, false, false);
 		} else if (commandLabel.equalsIgnoreCase("aws") && (player.hasPermission("arrowwall.aw.aws"))) {
-			util.spawnArrows(player, arrowsToSpawn, false, true);
+			util.spawnArrows(player, arrowsToSpawn, false, true, false);
 		} else if (commandLabel.equalsIgnoreCase("fws") && (player.hasPermission("arrowwall.aw.fws"))) {
-			util.spawnArrows(player, arrowsToSpawn, true, true);
+			util.spawnArrows(player, arrowsToSpawn, true, true, false);
+		} else if (commandLabel.equalsIgnoreCase("pw") && (player.hasPermission("arrowwall.aw.pw"))) {
+			util.spawnArrows(player, arrowsToSpawn, false, false, true);
 		} else {
 			player.sendMessage(ChatColor.RED + "You don't have permission to use that command.");
 			return false;

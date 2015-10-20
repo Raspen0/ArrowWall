@@ -19,6 +19,10 @@ commands:
         description: summons a flaming wall of arrows from the sky at the block the player is looking at
         usage: |
                     The command was not recognized. /fws [numberOfArrows]
+    pw:
+        description: summons an poisonous wall of arrows towards the direction the player is facing
+        usage: |
+                    The command was not recognized. /pw [numberOfArrows]
     awreload:
         description: reloads ArrowWall config
         usage: |
@@ -41,4 +45,7 @@ permissions:
       default: op
    arrowwall.aw.fws:
       description: Summons a flaming wall of arrows from the sky at the block the player is looking at
+      default: op
+   arrowwall.pw:
+      description: summons an poisonous wall of arrows towards the direction the player is facing
       default: op

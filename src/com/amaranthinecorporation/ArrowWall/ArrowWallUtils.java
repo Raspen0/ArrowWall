@@ -8,6 +8,7 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.util.Vector;
 
 public class ArrowWallUtils {
@@ -20,7 +21,7 @@ public class ArrowWallUtils {
 	
 	static int radius = 4;
 	
-	public boolean spawnArrows(Player target, int arrowCount, boolean onFire, boolean shootFromSky) {
+	public boolean spawnArrows(Player target, int arrowCount, boolean onFire, boolean shootFromSky, boolean Poison) {
 		
 		if (target != null) {
 			
@@ -63,7 +64,9 @@ public class ArrowWallUtils {
 				if (onFire) {
 					arrow.setFireTicks(plugin.cleanupTime);
 				}
-				
+				if (Poison){
+					arrow.setMetadata("Poison", new FixedMetadataValue(plugin, true));
+				}
 				arrows.add(arrow);
 				
 			}
@@ -73,6 +76,7 @@ public class ArrowWallUtils {
 				Timer arrowTimer = new Timer(true);
 				arrowTimer.schedule(new ArrowCleanupTimer(arrows), (long) plugin.cleanupTime, (long) (plugin.cleanupTime));
 			}
+			
 			
 			return true;
 			

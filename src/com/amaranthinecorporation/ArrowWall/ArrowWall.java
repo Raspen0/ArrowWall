@@ -34,6 +34,8 @@ public class ArrowWall extends JavaPlugin {
 
     public void onEnable() {
     	
+    	new EffectHelper(this);
+    	
     	config = new ArrowWallConfiguration(this.getDataFolder(), this);
     	config.setupConfiguration();
         config.readConfiguration();
@@ -43,7 +45,8 @@ public class ArrowWall extends JavaPlugin {
 		this.getCommand("fw").setExecutor(executor);  
 		this.getCommand("aws").setExecutor(executor);    
 		this.getCommand("fws").setExecutor(executor);  
-		this.getCommand("awreload").setExecutor(executor);  
+		this.getCommand("awreload").setExecutor(executor);
+		this.getCommand("pw").setExecutor(executor);
 
         PluginDescriptionFile pdfFile = this.getDescription();
         System.out.println( logPrefix + "version " + pdfFile.getVersion() + " enabled." );
